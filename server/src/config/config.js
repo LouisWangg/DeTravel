@@ -1,4 +1,5 @@
 module.exports = {
+    port: process.env.PORT || 8081,
     db: {
         options: {
             host: 'us-cdbr-east-05.cleardb.net',
