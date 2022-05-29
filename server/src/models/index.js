@@ -1,6 +1,6 @@
-const fs = require('fs') //to read through the file system
-const path = require('path') //to deal with absolute, relative, or other paths
-const Sequelize = require('sequelize') //to make a sequelize object that will later connect to the db
+const fs = require('fs')
+const path = require('path')
+const Sequelize = require('sequelize')
 const config = require('../config/config')
 const db = {}
 
