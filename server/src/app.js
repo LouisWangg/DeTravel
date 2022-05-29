@@ -19,6 +19,6 @@ if (process.env.NODE_ENV == 'production') {
 
 sequelize.sync()
     .then(() => {
-        app.listen(process.env.PORT || 5000)
-        console.log(`Server stared on port ${process.env.PORT || 5000}`)
+        app.listen(process.env.PORT || 8081)
+        console.log(`Server stared on port ${process.env.PORT || 8081}`)
     })
