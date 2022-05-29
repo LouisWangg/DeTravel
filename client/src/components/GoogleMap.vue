@@ -10,7 +10,7 @@
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
           </template>
-          <span>Ubah</span>
+          <span>Ubah TEST</span>
         </v-tooltip>
         <GmapMap :center="userPosition" :zoom='15' id ="map" style='width:100%; height:710px;' :options="{zoomControl: false, mapTypeControl: false}"> 
           <GmapMarker  
