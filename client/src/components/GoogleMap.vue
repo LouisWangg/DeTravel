@@ -105,11 +105,11 @@
           <v-col>
             <v-card-title class="headline">Detail Tempat</v-card-title>
             <v-card-text class="detailPlaceText">
-              <v-text-field label="Nama tempat" v-model="detailPlace.name" />
-              <v-textarea label="Deskripsi" v-model="detailPlace.desc" />
-              <v-textarea label="Alamat" rows="2" v-model="detailPlace.address" />
-              <v-text-field label="Jarak (km)" v-model="detailPlace.distance" />
-              <v-text-field label="Biaya masuk / orang (Rp)" v-model="detailPlace.entryFee" />
+              <v-text-field label="Nama tempat" v-model="detailPlace.name" :readonly="true" />
+              <v-textarea label="Deskripsi" v-model="detailPlace.desc" :readonly="true" />
+              <v-textarea label="Alamat" rows="2" v-model="detailPlace.address" :readonly="true" />
+              <v-text-field label="Jarak (km)" v-model="detailPlace.distance" :readonly="true" />
+              <v-text-field label="Biaya masuk / orang (Rp)" v-model="detailPlace.entryFee" :readonly="true" />
             </v-card-text>
           </v-col>
           <v-col>
