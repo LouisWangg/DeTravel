@@ -19,7 +19,7 @@
             <v-divider />
             
             <v-list nav>
-                <v-list-item-group v-model="model" active-class="green--text text--darken-2">
+                <v-list-item-group active-class="green--text text--darken-2">
                     <v-list-item @click="navigateTo({name: 'root'})">
                         <v-icon class="ml-3">mdi-home</v-icon>
                         <v-list-item-content class="mr-16 pr-8">
