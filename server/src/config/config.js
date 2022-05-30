@@ -4,10 +4,10 @@ module.exports = {
         options: {
             host: 'us-cdbr-east-05.cleardb.net',
             port: '3306',
-            database: 'heroku_fc1beaaf21c5a8c',
+            database: 'heroku_eabb5d1bb1dca5a',
             dialect: 'mysql',
-            username: 'b3aba3b2122df0',
-            password: '3abb592a'
+            username: 'bd1a379f817dc8',
+            password: '0048cdad'
         }
     },
     authentication: {

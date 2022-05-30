@@ -3,7 +3,6 @@
         <v-toolbar class="headerToolbar elevation-4" style="width: 100%; height: 67px;">
             <v-app-bar-nav-icon class="ml-1" @click.stop="drawer= !drawer" />
             <img src="@/assets/logo_size1.jpg" />
-            <p>TEST</p>
         </v-toolbar>
         
         <v-navigation-drawer v-if="$store.state.isLoggedIn || !$store.state.isLoggedIn || !$store.state.user.name.toLowerCase().includes('admin')"
