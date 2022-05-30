@@ -280,7 +280,7 @@ export default {
   width: 400px;
   height: 280px;
   margin-top: 155px;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .closeBtn {
