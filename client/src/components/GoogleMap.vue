@@ -279,8 +279,8 @@ export default {
 .imagePlace {
   width: 400px;
   height: 280px;
-  margin-top: 105px;
-  margin-right: 30px;
+  margin-top: 155px;
+  margin-right: 35px;
 }
 
 .closeBtn {
