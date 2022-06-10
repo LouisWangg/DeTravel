@@ -3,9 +3,8 @@ const Op = Sequelize.Op;
 const { Place } = require('../models')
 const { Wishlist } = require('../models')
 
-let byName = false
+let byName = false, byLast = false, byEarly = false
 
-// var items = [5,3,7,6,2,9];
 function swap (items, leftIndex, rightIndex){
     let temp = items[leftIndex]
     items[leftIndex] = items[rightIndex]
@@ -31,9 +30,36 @@ function partition (items, left, right) {
                 j--
             }
         }
+    } else if (byEarly == true) {
+        while (i <= j) {
+            while (Date.parse(items[i].createdAt) > Date.parse(pivot.createdAt)) {
+                i++
+            }
+            while (Date.parse(items[j].createdAt) < Date.parse(pivot.createdAt)) {
+                j--
+            }
+            if (i <= j) {
+                swap(items, i, j) //sawpping two elements
+                i++
+                j--
+            }
+        }
+    } else if (byLast == true) {
+        while (i <= j) {
+            while (Date.parse(items[i].createdAt) < Date.parse(pivot.createdAt)) {
+                i++
+            }
+            while (Date.parse(items[j].createdAt) > Date.parse(pivot.createdAt)) {
+                j--
+            }
+            if (i <= j) {
+                swap(items, i, j) //sawpping two elements
+                i++
+                j--
+            }
+        }
     } else {
         while (i <= j) {
-            console.log("TEST TEST\N")
             while (items[i].placeId < pivot.placeId) {
                 i++
             }
@@ -192,9 +218,13 @@ module.exports = {
             let newModel = []
 
             if (sort.toLowerCase() == "nama") {
-                byName = true
+                byName = true, byEarly = false, byLast = false
+            } else if (sort.toLowerCase() == "terakhir kali") {
+                byEarly = true, byName = false, byLast = false
+            } else if (sort.toLowerCase() == "pertama kali") {
+                byLast = true, byName = false, byEarly = false
             } else {
-                byName = false
+                byName = false, byEarly = false, byLast = false
             }
             
 
@@ -297,7 +327,8 @@ module.exports = {
                     "desc": row.Place.desc,
                     "address": row.Place.address,
                     "entryFee": numberWithCommas(Math.trunc(row.Place.entryFee)),
-                    "image": row.Place.image
+                    "image": row.Place.image,
+                    "createdAt": row.createdAt
                 })
             })
 
@@ -315,9 +346,13 @@ module.exports = {
             let tempResult = [], searchResult = []
 
             if (sort.toLowerCase() == "nama") {
-                byName = true
+                byName = true, byEarly = false, byLast = false
+            } else if (sort.toLowerCase() == "terakhir kali") {
+                byEarly = true, byName = false, byLast = false
+            } else if (sort.toLowerCase() == "pertama kali") {
+                byLast = true, byName = false, byEarly = false
             } else {
-                byName = false
+                byName = false, byEarly = false, byLast = false
             }
             
             const placeList = await Wishlist.findAll({
@@ -338,7 +373,8 @@ module.exports = {
                         "desc": placeList[i].Place.desc,
                         "address": placeList[i].Place.address,
                         "entryFee": numberWithCommas(Math.trunc(placeList[i].Place.entryFee)),
-                        "image": placeList[i].Place.image
+                        "image": placeList[i].Place.image,
+                        "createdAt": placeList[i].Place.createdAt
                     })
                 }
             }

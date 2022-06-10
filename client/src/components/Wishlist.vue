@@ -84,7 +84,7 @@ export default {
       timeout: 4000,
       deletePlaceDialog: false,
       deleteSnackbar: false,
-      sortList: ["None", "Nama"],
+      sortList: ["None", "Nama", "Pertama Kali", "Terakhir Kali"],
       sortDefault: "None",
       filterList: ["None", "Pantai", "Gunung", "Taman", "Museum", "Bukit", "Biaya (0 - 5.000)", "Biaya (5.000 - 25.000)", "Biaya (25.000 - 50.000)"],
       filterDefault: "None",

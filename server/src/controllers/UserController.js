@@ -5,30 +5,22 @@ const { Place } = require('../models')
 let byDistance = false, byName = false
 
 function calculateDistance (lat1, lat2, lon1, lon2) {
-    // The math module contains a function
-    // named toRadians which converts from
-    // degrees to radians.
     lon1 =  lon1 * Math.PI / 180
     lon2 = lon2 * Math.PI / 180
     lat1 = lat1 * Math.PI / 180
     lat2 = lat2 * Math.PI / 180
 
-    // Haversine formula
     let dlon = lon2 - lon1
     let dlat = lat2 - lat1
     let a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon / 2), 2)
 
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
 
-    // Radius of earth in kilometers. Use 3956
-    // for miles
     let r = 6371
 
-    // calculate the result
     return(c * r)
 }
 
-// var items = [5,3,7,6,2,9];
 function swap (items, leftIndex, rightIndex){
     let temp = items[leftIndex]
     items[leftIndex] = items[rightIndex]
@@ -36,9 +28,9 @@ function swap (items, leftIndex, rightIndex){
 }
 
 function partition (items, left, right) {
-    let pivot = items[Math.floor((right + left) / 2)] //middle element
-    i = left //left pointer
-    j = right //right pointer
+    let pivot = items[Math.floor((right + left) / 2)]
+    i = left
+    j = right
 
     if (byDistance == true) {
         while (i <= j) {
@@ -49,7 +41,7 @@ function partition (items, left, right) {
                 j--
             }
             if (i <= j) {
-                swap(items, i, j) //sawpping two elements
+                swap(items, i, j)
                 i++
                 j--
             }
@@ -63,7 +55,7 @@ function partition (items, left, right) {
                 j--
             }
             if (i <= j) {
-                swap(items, i, j) //sawpping two elements
+                swap(items, i, j)
                 i++
                 j--
             }
@@ -75,23 +67,20 @@ function partition (items, left, right) {
 function quickSort (items, left, right) {
     let index;
     if (items.length > 1) {
-        index = partition(items, left, right); //index returned from partition
-        if (left < index - 1) { //more elements on the left side of the pivot
+        index = partition(items, left, right); 
+        if (left < index - 1) { 
             quickSort(items, left, index - 1)
         }
-        if (index < right) { //more elements on the right side of the pivot
+        if (index < right) {
             quickSort(items, index, right)
         }
     }
     return items;
 }
 
-function makeCharTable (pattern) {
-    // javascript charCodeAt has maximum value of 65535, which from 2^16 - 1
-    // so we can only make our table from index 0 to 65535
+function makeCharTable (pattern) { //bad character heu
     const table = Array(65536).fill(pattern.length)
     
-    // update table for each matching character
     for (let i = 0; i < pattern.length - 1; i++) {
         table[pattern.charCodeAt(i)] = pattern.length - 1 - i
     }
@@ -112,7 +101,7 @@ function suffixLength (pattern, index) {
     return len;
 } 
 
-function makeOffsetTable (pattern) {
+function makeOffsetTable (pattern) { //good suffix heu
     let table = Array(pattern.length).fill(0)
     let prefixIndex = pattern.length
 
