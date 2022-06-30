@@ -48,7 +48,7 @@
         
         <v-card>
           <v-data-table 
-            :headers="headers" :items="places[0]" class="mr-0" :loading="loadData" loading-text="Loading... Mohon menunggu">
+            :headers="headers" :items="places[0]" class="mr-0" loading="loadData" loading-text="Loading... Mohon menunggu">
             <template v-slot:[`item.icons`]="{ item }">
               <v-icon v-if="item.name.toLowerCase().includes('pantai')">mdi-beach</v-icon>
               <v-icon v-if="item.name.toLowerCase().includes('gunung')">mdi-image-filter-hdr</v-icon>
