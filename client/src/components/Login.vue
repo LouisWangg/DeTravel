@@ -34,6 +34,7 @@
           <v-text-field label="Nama" v-model="name" />
           <v-text-field label="Email" v-model="email" />
           <v-text-field label="Password" type="password" v-model="password" />
+          <v-text-field label="Ulangi Password" type="password" v-model="rePassword" />
           
           <div class="error mt-3" v-html="error" />
           <br />
@@ -42,7 +43,7 @@
         <v-card-actions>
           <v-btn @click="register" class="closeBtn mr-8" 
             color="green lighten-1" outlined rounded>Daftar</v-btn>
-          <v-btn @click="registerDialog=false, error=null, email=null, name=null, password=null" 
+          <v-btn @click="registerDialog=false, error=null, email=null, name=null, password=null, rePassword=null" 
             class="closeBtn" color="red lighten-1" outlined rounded>Close</v-btn>
         </v-card-actions>
       </v-card>
@@ -75,6 +76,7 @@ export default {
       name: '',
       email: '',
       password: '',
+      rePassword: '',
       error: null,
       errorSnackbar: false,
       timeout: 2000,
@@ -110,12 +112,13 @@ export default {
         const response = await AuthenticationService.register({
           email: this.email,
           password: this.password,
-          name: this.name
+          name: this.name,
+          rePassword: this.rePassword
         })
         this.registerDialog = false
         this.success = "Proses registrasi berhasil!"
         this.successSnackbar = true
-        this.email = null, this.password = null, this.name = null
+        this.email = null, this.password = null, this.name = null, this.rePassword = null
       } catch (error) {
         this.error = error.response.data.error
       }

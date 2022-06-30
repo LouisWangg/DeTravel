@@ -48,7 +48,7 @@
         
         <v-card>
           <v-data-table 
-            :headers="headers" :items="places[0]" class="mr-0">
+            :headers="headers" :items="places[0]" class="mr-0" :loading="loadData" loading-text="Loading... Mohon menunggu">
             <template v-slot:[`item.icons`]="{ item }">
               <v-icon v-if="item.name.toLowerCase().includes('pantai')">mdi-beach</v-icon>
               <v-icon v-if="item.name.toLowerCase().includes('gunung')">mdi-image-filter-hdr</v-icon>
@@ -163,6 +163,7 @@ export default {
       error: null,
       errorSnackbar: false,
       timeout: 5000,
+      loadData: false
     }
   },
   async mounted() {
@@ -170,6 +171,7 @@ export default {
   },
   methods: {
     getUserPosition() {
+      this.loadData = true
       navigator.geolocation.getCurrentPosition(position => {
         this.userPosition = {
           lat: position.coords.latitude,
@@ -182,6 +184,7 @@ export default {
         }
         this.markers.push({ position: marker })
       })
+      this.loadData = false
     },
     changeDestination(place) {
       this.errorSnackbar = false
@@ -198,6 +201,7 @@ export default {
       this.renderingDirection()
     },
     changeUserPosition() {
+      this.loadData = true
       this.places.splice(0)
       if (this.currentPlace) {
         const marker = {
@@ -214,16 +218,19 @@ export default {
       }
     },
     searchPlaces(searchEngine) {
+      this.loadData = true
       this.places.splice(0)
       UserService.searchPlaces({searchEngine: searchEngine, userPosition: this.userPosition, sort: this.sortDefault})
         .then(a => (this.places.push(a.data)))
       this.filterDefault = "None"
+      this.loadData = false
     },
     showDetailPlace(item) {
       this.detailPlace = item
       this.detailPlaceDialog = true
     },
     changeSortMethod() {
+      this.loadData = true
       this.places.splice(0)
       this.showPlaceList()
     },
@@ -233,6 +240,7 @@ export default {
     showPlaceList() {
       UserService.showPlaceList({position: { latitude: this.userPosition.lat, longitude: this.userPosition.lng}, sort:this.sortDefault, filter: this.filterDefault})
         .then(a => (this.places.push(a.data)))
+      this.loadData = false
     },
     renderingDirection() {
       this.hidePanel = false

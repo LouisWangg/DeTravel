@@ -3,6 +3,28 @@
         <v-toolbar class="headerToolbar elevation-4" style="width: 100%; height: 67px;">
             <v-app-bar-nav-icon class="ml-1" @click.stop="drawer= !drawer" />
             <img src="@/assets/logo_size1.jpg" />
+
+            <v-spacer />
+
+            <v-tooltip v-if="!$store.state.isLoggedIn"  bottom>
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn @click="navigateTo({name: 'login'})" rounded icon 
+                        v-bind="attrs" v-on="on" class="mr-4" color="green">
+                        <v-icon>mdi-login</v-icon>
+                    </v-btn>
+                </template>
+                <span>Masuk</span>
+            </v-tooltip>
+
+            <v-tooltip v-if="$store.state.isLoggedIn" bottom>
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn @click="logout" rounded icon 
+                        v-bind="attrs" v-on="on" class="mr-4" color="green">
+                        <v-icon>mdi-logout</v-icon>
+                    </v-btn>
+                </template>
+                <span>Keluar</span>
+            </v-tooltip>
         </v-toolbar>
         
         <v-navigation-drawer v-if="$store.state.isLoggedIn || !$store.state.isLoggedIn || !$store.state.user.name.toLowerCase().includes('admin')"

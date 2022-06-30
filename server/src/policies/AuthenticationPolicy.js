@@ -8,6 +8,9 @@ module.exports = {
                 new RegExp('^[a-zA-Z0-9]{8,32}$')
             ),
             name: Joi.string(),
+            rePassword: Joi.string().regex(
+                new RegExp('^[a-zA-Z0-9]{8,32}$')
+            ),
         })
 
         const {error} = schema.validate(req.body)
@@ -34,6 +37,12 @@ module.exports = {
                 case 'name' :
                     res.status(400).send({
                         error: 'Kolom nama belum dimasukkan!'
+                    })
+                    break
+
+                case 'rePassword' :
+                    res.status(400).send({
+                        error: `Pengulangan kata kunci tidak sesuai dengan kata kunci yang telah dimasukkan!`
                     })
                     break
 

@@ -13,11 +13,12 @@ function jwtSignUser (user) { // to sign using a user object and give back a JWT
 module.exports = {
     async register (req, res) {
         try {
-            const {email, password, name} = req.body
+            const {email, password, name, rePassword} = req.body
             const user = await User.create({
                 email: email,
                 password: bcrypt.hashSync(password, bcrypt.genSaltSync()),
-                name: name
+                name: name,
+                rePassword: bcrypt.hashSync(rePassword, bcrypt.genSaltSync())
             })
             const userJson = user.toJSON()
             res.send({user: userJson, token: jwtSignUser(userJson)})
